@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.2.1
-Release:        13.10%{?dist}
+Release:        13.11%{?dist}
 Summary:        Exec Maven Plugin
 
 # Most of the files are under ASL 2.0 license, but there are some files
@@ -17,8 +17,8 @@ Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-invoker-plugin
-BuildRequires:  maven30-apache-commons-exec
+BuildRequires:  %{?scl_prefix}maven-invoker-plugin
+BuildRequires:  %{?scl_prefix}apache-commons-exec
 
 
 %description
@@ -33,7 +33,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n exec-maven-plugin-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 
 sed -i 's/\r$//' LICENSE.txt
@@ -46,14 +46,14 @@ cp -p %{SOURCE1} .
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # There are missing dependencies for tests
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -67,6 +67,9 @@ set -e -x
 %doc LICENSE.txt LICENSE-2.0.txt
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.2.1-13.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.2.1-13.10
 - maven33 rebuild
 
