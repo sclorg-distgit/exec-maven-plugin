@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.2.1
-Release:        13.11%{?dist}
+Release:        13.12%{?dist}
 Summary:        Exec Maven Plugin
 
 # Most of the files are under ASL 2.0 license, but there are some files
@@ -16,7 +16,7 @@ Source0:        http://repo1.maven.org/maven2/org/codehaus/mojo/exec-maven-plugi
 Source1:        http://www.apache.org/licenses/LICENSE-2.0.txt
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-invoker-plugin
 BuildRequires:  %{?scl_prefix}apache-commons-exec
 
@@ -67,6 +67,9 @@ set -e -x
 %doc LICENSE.txt LICENSE-2.0.txt
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.2.1-13.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.2.1-13.11
 - maven33 rebuild #2
 
